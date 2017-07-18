@@ -69,7 +69,7 @@
       ></div>
     </div>
   </mdl-card-supporting-text>
-  <mdl-card-menu *ngIf="isSelf">
+  <mdl-card-menu *ngIf="isSelf$ | async as isSelf">
     <button
       mdl-button
       (click)="$event.stopPropagation(); popover.toggle($event)"

@@ -13,6 +13,9 @@ import { ZoneService } from './shared/services/zone.service';
 import { StorageService } from './shared/services/storage.service';
 import { AsyncJobService } from './shared/services/async-job.service';
 import { CacheService } from './shared/services/cache.service';
+import { TAppState } from './reducers/index';
+import { Store } from '@ngrx/store';
+import { getName, isAuthenticated } from './selectors/auth';
 
 
 @Component({
@@ -26,30 +29,28 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 
   @ViewChild(MdlLayoutComponent) public layoutComponent: MdlLayoutComponent;
-  public loggedIn: boolean;
-  public title: string;
   public disableSecurityGroups = false;
 
   public themeColor: Color;
+  readonly loggedIn$ = this.store.select(isAuthenticated);
+  readonly username$ = this.store.select(getName);
 
   constructor(
     private auth: AuthService,
     private domSanitizer: DomSanitizer,
     private router: Router,
-    private error: ErrorService,
+    private store: Store<TAppState>,
     private languageService: LanguageService,
     private asyncJobService: AsyncJobService,
     private cacheService: CacheService,
     private storage: StorageService,
     private layoutService: LayoutService,
     private mdlDialogService: MdlDialogService,
-    private notification: NotificationService,
     private styleService: StyleService,
     private routerUtilsService: RouterUtilsService,
     private zoneService: ZoneService,
     private zone: NgZone
   ) {
-    this.title = this.auth.name;
   }
 
   public linkClick(routerLink: string): void {
@@ -62,11 +63,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   public ngOnInit(): void {
     this.loadSettings();
-
-    this.error.subscribe(e => this.handleError(e));
-    this.auth.loggedIn.subscribe(isLoggedIn => {
-      this.loggedIn = isLoggedIn;
-      this.updateAccount(this.loggedIn);
+    this.loggedIn$.subscribe(isLoggedIn => {
       if (isLoggedIn) {
         this.auth.startInactivityCounter();
         this.loadSettings();
@@ -142,26 +139,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   public get logoSource(): string {
     return `img/cloudstack_logo_${ this.isLightTheme ? 'light' : 'dark' }.png`;
-  }
-
-  private updateAccount(loggedIn: boolean): void {
-    if (loggedIn) {
-      this.title = this.auth.name;
-    }
-  }
-
-  private handleError(e: any): void {
-    if (e instanceof Response) {
-      switch (e.status) {
-        case 401:
-          this.notification.message('NOT_LOGGED_IN');
-          const route = this.routerUtilsService.getRouteWithoutQueryParams();
-          if (route !== '/login' && route !== '/logout') {
-            this.router.navigate(['/logout'], this.routerUtilsService.getRedirectionQueryParams());
-          }
-          break;
-      }
-    }
   }
 
   private loadSettings(): void {

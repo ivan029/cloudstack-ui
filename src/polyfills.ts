@@ -80,11 +80,14 @@ import 'rxjs/add/operator/mapTo';
 import 'rxjs/add/operator/onErrorResumeNext';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/finally';
+import 'rxjs/add/operator/withLatestFrom';
+import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/pluck';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/switchMapTo';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/observable/throw';
+import 'rxjs/add/observable/empty';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/observable/forkJoin';
 

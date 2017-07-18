@@ -1,8 +1,10 @@
 import { Component, EventEmitter, HostBinding, Input, Output, ViewChild } from '@angular/core';
 import { MdlPopoverComponent } from '@angular-mdl/popover';
 
-import { AuthService } from '../../shared';
 import { BaseTemplateModel } from '../shared';
+import { TAppState } from '../../reducers/index';
+import { Store } from '@ngrx/store';
+import { getUsername } from '../../selectors/auth';
 
 
 @Component({
@@ -11,6 +13,7 @@ import { BaseTemplateModel } from '../shared';
   styleUrls: ['template.component.scss']
 })
 export class TemplateComponent {
+  readonly isSelf$ = this.store.select(getUsername).map(username => username === this.template.account);
   @Input() public template: BaseTemplateModel;
   @Input() public isSelected: boolean;
   @HostBinding('class.single-line') @Input() public singleLine = true;
@@ -19,7 +22,8 @@ export class TemplateComponent {
   @Output() public onClick = new EventEmitter();
   @ViewChild(MdlPopoverComponent) public popoverComponent: MdlPopoverComponent;
 
-  constructor(private authService: AuthService) {}
+  constructor(private store: Store<TAppState>) {
+  }
 
   public handleClick(e: MouseEvent): void {
     e.stopPropagation();
@@ -32,10 +36,6 @@ export class TemplateComponent {
 
   public get ready(): boolean {
     return this.template.isReady;
-  }
-
-  public get isSelf(): boolean {
-    return this.authService.username === this.template.account;
   }
 
   public removeTemplate(): void {

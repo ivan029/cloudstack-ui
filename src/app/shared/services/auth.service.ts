@@ -1,8 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
 import { BackendResource } from '../decorators';
 import { BaseModelStub } from '../models';
 import { AsyncJobService } from './async-job.service';
@@ -21,7 +19,6 @@ const DEFAULT_SESSION_REFRESH_INTERVAL = 60;
   entityModel: BaseModelStub
 })
 export class AuthService extends BaseBackendService<BaseModelStub> {
-  public loggedIn: BehaviorSubject<boolean>;
   private refreshTimer: any;
   private numberOfRefreshes = 0;
   private inactivityTimeout: number;
@@ -37,7 +34,6 @@ export class AuthService extends BaseBackendService<BaseModelStub> {
     protected zone: NgZone
   ) {
     super();
-    this.loggedIn = new BehaviorSubject<boolean>(!!this.userId);
   }
 
   public startInactivityCounter() {
@@ -81,83 +77,21 @@ export class AuthService extends BaseBackendService<BaseModelStub> {
       });
   }
 
-  public get name(): string {
-    return this.storage.read('name') || '';
-  }
-
-  public get username(): string {
-    return this.storage.read('username') || '';
-  }
-
-  public get userId(): string {
-    return this.storage.read('userId') || '';
-  }
-
-  public set name(name: string) {
-    if (!name) {
-      this.storage.remove('name');
-    } else {
-      this.storage.write('name', name);
-    }
-  }
-
-  public set username(username: string) {
-    if (!username) {
-      this.storage.remove('username');
-    } else {
-      this.storage.write('username', username);
-    }
-  }
-
-  public set userId(userId: string) {
-    if (!userId) {
-      this.storage.remove('userId');
-    } else {
-      this.storage.write('userId', userId);
-    }
-  }
-
   public login(username: string, password: string, domain?: string): Observable<void> {
     return this.postRequest('login', { username, password, domain })
       .map(res => this.getResponse(res))
-      .do(res => {
-        this.setLoggedIn(res.username, `${res.firstname} ${res.lastname}`, res.userid);
-      })
       .catch((error) => this.handleCommandError(error));
   }
 
   public logout(): Observable<void> {
-    const obs = new Subject<void>();
-    this.postRequest('logout')
-      .do(() => this.setLoggedOut())
+    return this.postRequest('logout')
       .catch(error => {
         this.error.send(error);
         return Observable.throw('Unable to log out.');
-      })
-      .subscribe(() => obs.next());
-    return obs;
+      });
   }
-
-  public isLoggedIn(): Observable<boolean> {
-    return Observable.of(!!this.userId);
-  }
-
-  public sendRefreshRequest(): void {
-    this.userService.getList().subscribe();
-  }
-
-  private setLoggedIn(username: string, name: string, userId: string): void {
-    this.name = name;
-    this.username = username;
-    this.userId = userId;
-    this.loggedIn.next(true);
-  }
-
-  private setLoggedOut(): void {
-    this.name = '';
-    this.username = '';
-    this.userId = '';
-    this.loggedIn.next(false);
+  public sendRefreshRequest(): Observable<Array<BaseModelStub>> {
+    return this.userService.getList();
   }
 
   private refreshSession(): void {
@@ -165,7 +99,7 @@ export class AuthService extends BaseBackendService<BaseModelStub> {
       this.clearInactivityTimer();
       this.zone.run(() => this.router.navigate(['/logout'], this.routerUtilsService.getRedirectionQueryParams()));
     } else {
-      this.sendRefreshRequest();
+      this.sendRefreshRequest().subscribe();
     }
   }
 

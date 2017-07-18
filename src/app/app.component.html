@@ -1,10 +1,10 @@
 <mdl-layout
-  [mdl-layout-fixed-drawer]="loggedIn ? true : null"
+  [mdl-layout-fixed-drawer]="loggedIn$ | async"
   #mainLayout="mdlLayout"
   mdl-layout-no-drawer-button
 >
   <mdl-layout-drawer
-    *ngIf="loggedIn"
+    *ngIf="loggedIn$ | async as loggedIn"
     class="mdl-color--grey-50 flex-container"
     [attr.style]="drawerStyles"
     [class.drawer-open]="isDrawerOpen"
@@ -19,7 +19,7 @@
       <img class="logo" [src]="logoSource">
       <div class="title-header">
         <mdl-icon class="link-element">person</mdl-icon>
-        <div class="link-element">{{ 'WELCOME' | translate:{ name: title } }}</div>
+        <div class="link-element">{{ 'WELCOME' | translate:{ name: username$ | async } }}</div>
       </div>
     </mdl-layout-title>
     <nav #navigationBar class="mdl-navigation">
@@ -132,7 +132,7 @@
   </mdl-layout-drawer>
   <mdl-layout-content
     class="mdl-color--grey-100"
-    [class.content-margin]="isDrawerOpen && loggedIn"
+    [class.content-margin]="isDrawerOpen && (loggedIn$ | async)"
   >
     <router-outlet></router-outlet>
   </mdl-layout-content>

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { UtilsService } from './utils.service';
-import { AuthService } from './';
 
 export enum INotificationStatus {
   Pending,
@@ -23,11 +22,9 @@ export class JobsNotificationService {
   private _unseenJobs: Subject<number>;
 
   constructor(
-    private authService: AuthService,
     private utilsService: UtilsService
   ) {
     this.reset();
-    this.authService.loggedIn.subscribe(() => this.reset());
   }
 
   public get pendingJobsCount(): number {

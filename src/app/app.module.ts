@@ -25,6 +25,14 @@ import { SshKeysModule } from './ssh-keys/ssh-keys.module';
 import { TemplateModule } from './template';
 import { VmModule } from './vm';
 
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { reducer } from './reducers/index';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { RouterStoreModule } from '@ngrx/router-store';
+import { RoutingEffects } from './effects/routing.effects';
+import { BootstrapEffects } from './effects/bootstrap.effects';
+
 
 export function HttpLoaderFactory(http: Http): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './i18n/', '.json');
@@ -36,6 +44,10 @@ export function HttpLoaderFactory(http: Http): TranslateHttpLoader {
     HttpModule,
     FormsModule,
     TranslateModule.forRoot(),
+    StoreModule.provideStore(reducer),
+    StoreDevtoolsModule.instrumentOnlyWithExtension(),
+    EffectsModule.runAfterBootstrap(BootstrapEffects),
+    EffectsModule.runAfterBootstrap(RoutingEffects),
     EventsModule,
     MdlModule,
     MdlPopoverModule,
@@ -56,6 +68,7 @@ export function HttpLoaderFactory(http: Http): TranslateHttpLoader {
         deps: [Http]
       }
     }),
+    RouterStoreModule.connectRouter(),
     RouterModule.forRoot(routes)
   ],
   declarations: [

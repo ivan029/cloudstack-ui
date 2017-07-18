@@ -10,7 +10,7 @@ import { SshKeysPageComponent } from './ssh-keys/ssh-keys-page.component';
 import { ReloadComponent } from './shared/components/reload/reload.component';
 
 
-export const routes: Routes = [
+const publicRoutes = [
   {
     path: 'login',
     component: LoginComponent,
@@ -23,6 +23,14 @@ export const routes: Routes = [
   {
     path: 'reload',
     component: ReloadComponent
+  }
+];
+
+const protectedRoutes = [
+  {
+    path: '',
+    redirectTo: 'instances',
+    pathMatch: 'full',
   },
   {
     path: 'sg-templates',
@@ -48,4 +56,9 @@ export const routes: Routes = [
     path: '**',
     redirectTo: 'instances'
   }
+];
+
+export const routes: Routes = [
+  ...publicRoutes,
+  ...protectedRoutes
 ];

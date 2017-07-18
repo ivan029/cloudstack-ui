@@ -4,6 +4,10 @@ import { AbstractControl } from '@angular/forms';
 
 import { AuthService, NotificationService } from '../shared';
 import { ConfigService } from '../shared/services/config.service';
+import { TAppState } from '../reducers/index';
+import { Store } from '@ngrx/store';
+import { AuthLogInAction } from '../actions/auth';
+import { go, replace } from '@ngrx/router-store';
 
 
 @Component({
@@ -24,6 +28,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
+    private store: Store<TAppState>,
     private notification: NotificationService,
     private route: ActivatedRoute,
     private router: Router,
@@ -66,12 +71,13 @@ export class LoginComponent implements OnInit {
   private login(username: string, password: string, domain: string): void {
     this.auth
       .login(username, password, domain)
-      .subscribe(() => this.handleLogin(), error => this.handleError(error));
+      .subscribe((res) => this.handleLogin(res), error => this.handleError(error));
   }
 
-  private handleLogin(): void {
+  private handleLogin(res: any): void {
+    this.store.dispatch(new AuthLogInAction(res));
     const next = this.route.snapshot.queryParams['next'] || '';
-    this.router.navigateByUrl(next);
+    this.store.dispatch(go(next));
   }
 
   private handleError(error: any): void {

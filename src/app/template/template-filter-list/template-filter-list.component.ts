@@ -175,7 +175,7 @@ export class TemplateFilterListComponent implements OnInit {
           this.selectedFilters.includes(TemplateFilters.featured) || !template.isFeatured;
         const selfFilter = !this.selectedFilters.length ||
           this.selectedFilters.includes(TemplateFilters.self) ||
-          !(template.account === this.authService.username);
+          !(template.account);// === this.authService.username); // todo !!!!!
         const osFilter = !this.selectedOsFamilies.length ||
           this.selectedOsFamilies.includes(template.osType.osFamily);
         return featuredFilter && selfFilter && osFilter;

@@ -3,8 +3,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { TranslateService } from '@ngx-translate/core';
 
 import { Color, LanguageService, StyleService } from '../shared';
-import { AuthService, NotificationService } from '../shared/services';
+import { NotificationService } from '../shared/services';
 import { UserService } from '../shared/services/user.service';
+import { TAppState } from '../reducers/index';
+import { Store } from '@ngrx/store';
+import { getUserId } from '../selectors/auth';
 
 
 @Component({
@@ -13,7 +16,7 @@ import { UserService } from '../shared/services/user.service';
   styleUrls: ['settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
-  public userId: string;
+  readonly userId$ = this.store.select(getUserId);
   public accentColor: Color;
   public firstDayOfWeek = 1;
   public language: string;
@@ -40,7 +43,7 @@ export class SettingsComponent implements OnInit {
   ];
 
   constructor(
-    private authService: AuthService,
+    private store: Store<TAppState>,
     private formBuilder: FormBuilder,
     private languageService: LanguageService,
     private notificationService: NotificationService,
@@ -48,7 +51,6 @@ export class SettingsComponent implements OnInit {
     private translateService: TranslateService,
     private userService: UserService
   ) {
-    this.userId = this.authService.userId;
   }
 
   public ngOnInit(): void {
@@ -96,11 +98,12 @@ export class SettingsComponent implements OnInit {
   }
 
   public updatePassword(): void {
-    this.userService.updatePassword(this.authService.userId, this.password)
-      .subscribe(
-        () => this.notificationService.message('PASSWORD_CHANGED_SUCCESSFULLY'),
-        error => this.notificationService.error(error.errortext)
-      );
+    this.userId$.switchMap(userId => {
+      return this.userService.updatePassword(userId, this.password);
+    }).subscribe(
+      () => this.notificationService.message('PASSWORD_CHANGED_SUCCESSFULLY'),
+      error => this.notificationService.error(error.errortext)
+    );
     this.passwordUpdateForm.reset();
   }
 

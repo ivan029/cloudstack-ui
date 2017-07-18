@@ -14,7 +14,6 @@ import {
 
 import {
   AffinityGroupService,
-  AuthService,
   DiskOffering,
   DiskOfferingService,
   DiskStorageService,
@@ -40,6 +39,9 @@ import { AffinityGroupType } from '../../shared/models/affinity-group.model';
 import { ResourceUsageService } from '../../shared/services/resource-usage.service';
 import { DialogService } from '../../dialog/dialog-module/dialog.service';
 import { MdlDialogReference } from '../../dialog/dialog-module';
+import { TAppState } from '../../reducers/index';
+import { Store } from '@ngrx/store';
+import { getUsername } from '../../selectors/auth';
 
 
 class VmCreationData {
@@ -111,8 +113,8 @@ export class VmCreationComponent implements OnInit {
   private selectedDiskOffering: DiskOffering;
 
   constructor(
+    private store: Store<TAppState>,
     private affinityGroupService: AffinityGroupService,
-    private auth: AuthService,
     private changeDetectorRef: ChangeDetectorRef,
     private dialog: MdlDialogReference,
     private dialogService: DialogService,
@@ -137,7 +139,9 @@ export class VmCreationComponent implements OnInit {
     });
 
     this.translateService.get(
-      this.keyboards.map(kb => { return 'KB_' + kb.toUpperCase(); })
+      this.keyboards.map(kb => {
+        return 'KB_' + kb.toUpperCase();
+      })
     )
       .subscribe(strs => {
         let keyboardTranslations = {};
@@ -334,10 +338,9 @@ export class VmCreationComponent implements OnInit {
   }
 
   private getDefaultVmName(): Observable<string> {
-    return this.vmService.getNumberOfVms()
-      .map(numberOfVms => {
-        return `vm-${this.auth.username}-${numberOfVms + 1}`;
-      });
+    return this.store.select(getUsername).take(1)
+      .switchMap(username => this.vmService.getNumberOfVms()
+        .map(numberOfVms => `vm-${username}-${numberOfVms + 1}`));
   }
 
   private getVmCreateData(): Observable<VmCreationData> {
