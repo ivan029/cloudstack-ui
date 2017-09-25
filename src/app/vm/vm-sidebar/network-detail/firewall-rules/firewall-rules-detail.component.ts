@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { SgRulesComponent } from '../../../../security-group/sg-rules/sg-rules.component';
 import { SecurityGroup, SecurityGroupType } from '../../../../security-group/sg.model';
@@ -14,7 +14,7 @@ export class FirewallRulesDetailComponent {
   @Input() public vm: VirtualMachine;
 
   constructor(
-    private dialog: MdDialog,
+    private dialog: MatDialog,
     private router: Router
   ) {}
 

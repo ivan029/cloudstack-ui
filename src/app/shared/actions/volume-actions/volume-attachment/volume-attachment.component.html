@@ -6,19 +6,19 @@
     <form (ngSubmit)="attach($event)" #volumeAttachmentForm="ngForm" novalidate>
       <div class="mat-dialog-content">
         <div>
-          <md-select
+          <mat-select
             *ngIf="virtualMachineId"
             [(ngModel)]="virtualMachineId"
             id="vm"
             name="vm"
           >
-            <md-option
+            <mat-option
               *ngFor="let vm of virtualMachines"
               [value]="vm.id"
             >
               {{ vm.name }}
-            </md-option>
-          </md-select>
+            </mat-option>
+          </mat-select>
         </div>
 
         <div *ngIf="!virtualMachineId">
@@ -29,16 +29,16 @@
 
         <button
           *ngIf="virtualMachineId"
-          md-button
+          mat-button
           color="primary"
-          mdDialogClose
+          matDialogClose
           type="button"
         >
           {{ 'COMMON.CANCEL' | translate }}
         </button>
         <button
           *ngIf="virtualMachines"
-          md-button
+          mat-button
           color="primary"
           type="submit"
         >

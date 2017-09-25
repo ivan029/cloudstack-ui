@@ -2,16 +2,16 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
-  MdAutocompleteModule,
-  MdButtonModule,
-  MdCheckboxModule,
-  MdDialogModule,
-  MdIconModule,
-  MdInputModule,
-  MdMenuModule,
-  MdSelectModule,
-  MdTabsModule,
-  MdTooltipModule
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatCheckboxModule,
+  MatDialogModule,
+  MatIconModule,
+  MatInputModule,
+  MatMenuModule,
+  MatSelectModule,
+  MatTabsModule,
+  MatTooltipModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -92,16 +92,16 @@ import { NicFieldsComponent } from './vm-sidebar/network-detail/nics/nic/nic-fie
     DynamicModule.withComponents([VmListItemComponent]),
     FormsModule,
     DraggableSelectModule,
-    MdAutocompleteModule,
-    MdButtonModule,
-    MdCheckboxModule,
-    MdDialogModule,
-    MdIconModule,
-    MdInputModule,
-    MdMenuModule,
-    MdSelectModule,
-    MdTabsModule,
-    MdTooltipModule,
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatIconModule,
+    MatInputModule,
+    MatMenuModule,
+    MatSelectModule,
+    MatTabsModule,
+    MatTooltipModule,
     PulseModule,
     ReactiveFormsModule,
     RouterModule,

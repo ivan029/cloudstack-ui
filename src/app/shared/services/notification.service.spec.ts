@@ -9,7 +9,7 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import { async, ComponentFixture, inject, TestBed } from '@angular/core/testing';
-import { MdSnackBar, MdSnackBarModule, OverlayContainer } from '@angular/material';
+import { MatSnackBar, MatSnackBarModule, OverlayContainer } from '@angular/material';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateService } from '@ngx-translate/core';
 import { MockTranslateService } from '../../../testutils/mocks/mock-translate.service.spec';
@@ -17,7 +17,7 @@ import { NotificationService } from './notification.service';
 
 describe('Service: Notification service', () => {
   let notificationService: NotificationService;
-  let mdSnackBar: MdSnackBar;
+  let matSnackBar: MatSnackBar;
   let liveAnnouncer: LiveAnnouncer;
   let overlayContainerElement: HTMLElement;
   let testViewContainerRef: ViewContainerRef;
@@ -25,7 +25,7 @@ describe('Service: Notification service', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [MdSnackBarModule, NotificationTestModule, NoopAnimationsModule],
+      imports: [MatSnackBarModule, NotificationTestModule, NoopAnimationsModule],
       providers: [
         NotificationService,
         { provide: TranslateService, useClass: MockTranslateService },
@@ -40,14 +40,14 @@ describe('Service: Notification service', () => {
   }));
 
   beforeEach(async(inject(
-    [NotificationService, MdSnackBar, LiveAnnouncer],
+    [NotificationService, MatSnackBar, LiveAnnouncer],
     (
       service: NotificationService,
-      snackBar: MdSnackBar,
+      snackBar: MatSnackBar,
       lAnnouncer: LiveAnnouncer
     ) => {
       notificationService = service;
-      mdSnackBar = snackBar;
+      matSnackBar = snackBar;
       liveAnnouncer = lAnnouncer;
     }
     ))
@@ -56,7 +56,7 @@ describe('Service: Notification service', () => {
   afterEach(() => {
     overlayContainerElement.innerHTML = '';
     liveAnnouncer = undefined;
-    mdSnackBar = undefined;
+    matSnackBar = undefined;
     notificationService = undefined;
   });
 
@@ -72,14 +72,14 @@ describe('Service: Notification service', () => {
     expect(notificationService instanceof NotificationService).toBeTruthy();
   });
 
-  it('should call MdSnackBar method to show the notification', () => {
-    const testMessage = spyOn(mdSnackBar, 'open');
+  it('should call MatSnackBar method to show the notification', () => {
+    const testMessage = spyOn(matSnackBar, 'open');
     notificationService.message('test');
     expect(testMessage).toHaveBeenCalled();
   });
 
   it('should support 3 types of notifications', () => {
-    const testNotification = spyOn(mdSnackBar, 'open');
+    const testNotification = spyOn(matSnackBar, 'open');
     notificationService.message('test');
     notificationService.warning('test', 'test');
     notificationService.error('test');
@@ -121,7 +121,7 @@ class TestComponent {
 }
 
 @NgModule({
-  imports: [CommonModule, MdSnackBarModule],
+  imports: [CommonModule, MatSnackBarModule],
   exports: [TestComponent, ViewContainerDirective],
   declarations: [TestComponent, ViewContainerDirective],
   entryComponents: [TestComponent],

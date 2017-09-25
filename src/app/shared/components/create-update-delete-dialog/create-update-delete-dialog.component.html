@@ -9,36 +9,36 @@
   novalidate
 >
   <div class="mat-dialog-content">
-    <md-radio-group
+    <mat-radio-group
       name="radio"
       [ngModel]="mode"
       (ngModelChange)="setMode($event)"
     >
-      <md-radio-button
+      <mat-radio-button
         *ngIf="enableAssign"
         [value]="modes.assign"
       >
         {{ assignLabel | translate }}
-      </md-radio-button>
+      </mat-radio-button>
 
-      <md-radio-button
+      <mat-radio-button
         *ngIf="enableCreate"
         [value]="modes.create"
       >
         {{ createLabel | translate }}
-      </md-radio-button>
+      </mat-radio-button>
 
-      <md-radio-button
+      <mat-radio-button
         *ngIf="defaultValue && enableRemove"
         [value]="modes.remove"
       >
         <div>{{ removeLabel | translate:{ value: defaultValue } }}</div>
-      </md-radio-button>
-    </md-radio-group>
+      </mat-radio-button>
+    </mat-radio-group>
 
-    <md-form-field *ngIf="mode === modes.create" class="full-width-input">
+    <mat-form-field *ngIf="mode === modes.create" class="full-width-input">
       <input
-        mdInput
+        matInput
         type="text"
         name="textValue"
         [(ngModel)]="newValue"
@@ -47,26 +47,26 @@
         autofocus
         required
       >
-    </md-form-field>
+    </mat-form-field>
 
-    <md-select
+    <mat-select
       name="selectValue"
       *ngIf="mode === modes.assign"
       [(ngModel)]="newValue"
       [placeholder]="selectPlaceholder | translate"
     >
-      <md-option
+      <mat-option
         *ngFor="let option of options"
         [value]="option"
       >
         {{ option }}
-      </md-option>
-    </md-select>
+      </mat-option>
+    </mat-select>
   </div>
 
   <div class="mat-dialog-actions">
     <button
-      md-button
+      mat-button
       color="primary"
       type="button"
       (click)="cancel()"
@@ -75,7 +75,7 @@
     </button>
     <button
       *ngIf="mode !== modes.remove"
-      md-button
+      mat-button
       color="primary"
       type="submit"
       [disabled]="!valueChanged || !form.valid"
@@ -84,7 +84,7 @@
     </button>
     <button
       *ngIf="mode === modes.remove"
-      md-button
+      mat-button
       color="primary"
       type="submit"
     >

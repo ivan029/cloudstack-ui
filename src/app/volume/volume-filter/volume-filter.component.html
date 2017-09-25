@@ -1,14 +1,14 @@
 <cs-top-bar>
   <div class="options-panel">
-    <md-checkbox
+    <mat-checkbox
       name="volumeOnly"
       [(ngModel)]="spareOnly"
       (change)="update()"
     >
       {{ 'VOLUME_PAGE.FILTERS.SPARE_DRIVES_ONLY' | translate }}
-    </md-checkbox>
+    </mat-checkbox>
 
-    <md-select
+    <mat-select
       *ngIf="zones"
       class="filter-select"
       multiple="true"
@@ -16,20 +16,20 @@
       [(ngModel)]="selectedZones"
       (change)="update()"
     >
-      <md-option *ngFor="let z of zones" [value]="z">{{ z.name }}</md-option>
-    </md-select>
+      <mat-option *ngFor="let z of zones" [value]="z">{{ z.name }}</mat-option>
+    </mat-select>
 
-    <md-select
+    <mat-select
       class="filter-select"
       multiple="true"
       [placeholder]="'VOLUME_PAGE.FILTERS.SELECT_TYPES' | translate"
       [(ngModel)]="selectedTypes"
       (change)="update()"
     >
-      <md-option *ngFor="let t of types" [value]="t">
+      <mat-option *ngFor="let t of types" [value]="t">
         {{ getVolumeTypeName(t) | translate }}
-      </md-option>
-    </md-select>
+      </mat-option>
+    </mat-select>
 
     <cs-divider-vertical></cs-divider-vertical>
 
@@ -42,9 +42,9 @@
       [dragItems]="groupings"
       (change)="update()"
     >
-      <md-option *ngFor="let g of groupings" [value]="g">
+      <mat-option *ngFor="let g of groupings" [value]="g">
         {{ g.label | translate }}
-      </md-option>
+      </mat-option>
     </cs-draggable-select>
   </div>
 </cs-top-bar>

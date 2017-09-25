@@ -6,7 +6,7 @@ import {
   NgForm,
   Validators
 } from '@angular/forms';
-import { MdSelectChange } from '@angular/material';
+import { MatSelectChange } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
 import { Color } from '../shared/models/color.model';
 import { AuthService } from '../shared/services/auth.service';
@@ -94,13 +94,13 @@ export class SettingsComponent extends WithUnsubscribe() implements OnInit {
     return timeFormatTranslations[format];
   }
 
-  public changeLanguage(change: MdSelectChange): void {
+  public changeLanguage(change: MatSelectChange): void {
     this.loading = true;
     this.languageService.setLanguage(change.value).subscribe();
     this.loadDayTranslations();
   }
 
-  public changeTimeFormat(change: MdSelectChange): void {
+  public changeTimeFormat(change: MatSelectChange): void {
     this.updatingTimeFormat = true;
     this.languageService
       .setTimeFormat(change.value)
@@ -132,7 +132,7 @@ export class SettingsComponent extends WithUnsubscribe() implements OnInit {
     this.passwordForm.resetForm();
   }
 
-  public firstDayOfWeekChange(change: MdSelectChange): void {
+  public firstDayOfWeekChange(change: MatSelectChange): void {
     this.firstDayOfWeek = change.value;
     this.updatingFirstDayOfWeek = true;
     this.userTagService

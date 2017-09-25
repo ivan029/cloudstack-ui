@@ -11,35 +11,35 @@
         (change)="getEvents({ reload: true })"
       ></cs-date-picker>
 
-      <md-select
+      <mat-select
         class="level-selector"
         [(ngModel)]="selectedLevels"
         (change)="getEvents()"
         multiple="true"
         [placeholder]="'EVENT_PAGE.SELECT_LEVELS' | translate"
       >
-        <md-option
+        <mat-option
           *ngFor="let level of levels"
           [value]="level"
         >
           {{ level }}
-        </md-option>
-      </md-select>
+        </mat-option>
+      </mat-select>
 
-      <md-select
+      <mat-select
         *ngIf="eventTypes"
         [(ngModel)]="selectedTypes"
         (change)="getEvents()"
         multiple="true"
         [placeholder]="'EVENT_PAGE.SELECT_TYPES' | translate"
       >
-        <md-option
+        <mat-option
           *ngFor="let et of eventTypes"
           [value]="et"
         >
           {{ et }}
-        </md-option>
-      </md-select>
+        </mat-option>
+      </mat-select>
       <cs-search
         [(ngModel)]="query"
         (ngModelChange)="getEvents()"

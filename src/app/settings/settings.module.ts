@@ -2,11 +2,11 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
-  MdButtonModule,
-  MdIconModule,
-  MdInputModule,
-  MdSelectModule,
-  MdTooltipModule
+  MatButtonModule,
+  MatIconModule,
+  MatInputModule,
+  MatSelectModule,
+  MatTooltipModule
 } from '@angular/material';
 import { TranslateModule } from '@ngx-translate/core';
 import { ClipboardModule } from 'ngx-clipboard/dist';
@@ -21,11 +21,11 @@ import { SettingsComponent } from './settings.component';
     CommonModule,
     FormsModule,
     TranslateModule,
-    MdTooltipModule,
-    MdButtonModule,
-    MdIconModule,
-    MdInputModule,
-    MdSelectModule,
+    MatTooltipModule,
+    MatButtonModule,
+    MatIconModule,
+    MatInputModule,
+    MatSelectModule,
     SharedModule,
     ReactiveFormsModule,
     ClipboardModule

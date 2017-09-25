@@ -7,7 +7,10 @@ import {
   PipeTransform
 } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MdDialogModule, MdSelectModule, MdTableModule } from '@angular/material';
+import {
+  MatDialogModule, MATERIAL_COMPATIBILITY_MODE, MatSelectModule,
+  MatTableModule
+} from '@angular/material';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -137,10 +140,10 @@ describe('event list component', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        MdDialogModule,
+        MatDialogModule,
         CdkTableModule,
-        MdTableModule,
-        MdSelectModule,
+        MatTableModule,
+        MatSelectModule,
         BrowserAnimationsModule
       ],
       declarations: [
@@ -152,6 +155,7 @@ describe('event list component', () => {
         MockNotificationBoxComponent
       ],
       providers: [
+        { provide: MATERIAL_COMPATIBILITY_MODE, useValue: true },
         SessionStorageService,
         { provide: Router, useClass: MockRouter },
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
@@ -283,7 +287,7 @@ describe('event list component', () => {
 
     fixture.detectChanges();
     fixture.detectChanges(); // doesn't work without double detectChange()!
-    const td = fixture.debugElement.queryAll(By.css('md-cell'));
+    const td = fixture.debugElement.queryAll(By.css('mat-cell'));
     expect(td[0].nativeElement.textContent.trim()).toBe('user_logged_in');
     expect(td[1].nativeElement.textContent.trim()).toBe('INFO');
     expect(td[2].nativeElement.textContent.trim()).toBe('USER.LOGIN');

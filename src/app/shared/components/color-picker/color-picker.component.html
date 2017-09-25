@@ -5,14 +5,14 @@
 >
   <div class="color-preview" [style.background-color]="selectedColor?.value"></div>
 </div>
-<md-form-field [csPopoverTrigger]="popover" class="full-width-input">
+<mat-form-field [csPopoverTrigger]="popover" class="full-width-input">
   <input
-    mdInput
+    matInput
     [value]="selectedColor?.value.toLowerCase()"
     [disabled]="disabled"
     readonly
   >
-</md-form-field>
+</mat-form-field>
 
 <div class="popover-container">
   <cs-popover #popover>

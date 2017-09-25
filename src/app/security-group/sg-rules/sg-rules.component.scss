@@ -9,11 +9,11 @@
   }
 }
 
-:host md-form-field {
+:host mat-form-field {
   width: 120px;
 }
 
-:host /deep/ md-spinner {
+:host /deep/ mat-spinner {
   position: relative;
   top: 2px;
 }
@@ -47,6 +47,6 @@
   background-color: #eeeeee !important;
 }
 
-.mat-input-container {
+.mat-form-field {
   font-size: 16px;
 }

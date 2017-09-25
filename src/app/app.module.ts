@@ -3,14 +3,14 @@ import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
-  MdButtonModule,
-  MdCheckboxModule,
-  MdDialog,
-  MdIconModule,
-  MdInputModule,
-  MdProgressSpinnerModule,
-  MdSidenavModule,
-  MdTooltipModule
+  MatButtonModule,
+  MatCheckboxModule,
+  MatDialog, MATERIAL_COMPATIBILITY_MODE,
+  MatIconModule,
+  MatInputModule,
+  MatProgressSpinnerModule,
+  MatSidenavModule,
+  MatTooltipModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -65,13 +65,13 @@ export function InitAppFactory(
     FormsModule,
     DragulaModule,
     EventsModule,
-    MdButtonModule,
-    MdCheckboxModule,
-    MdIconModule,
-    MdInputModule,
-    MdProgressSpinnerModule,
-    MdSidenavModule,
-    MdTooltipModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
+    MatSidenavModule,
+    MatTooltipModule,
     ScrollDispatchModule,
     SecurityGroupModule,
     ServiceOfferingModule,
@@ -105,7 +105,8 @@ export function InitAppFactory(
       deps: [AuthService, HttpClient, ConfigService],
       multi: true
     },
-    MdDialog,
+    { provide: MATERIAL_COMPATIBILITY_MODE, useValue: true },
+    MatDialog,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: BaseHttpInterceptor,

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MdDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { DialogService } from '../../dialog/dialog-service/dialog.service';
 import { SSHKeyPair } from '../../shared/models';
@@ -17,7 +17,7 @@ export class SShKeyCreationDialogComponent {
   public loading: boolean;
 
   constructor(
-    public dialogRef: MdDialogRef<SShKeyCreationDialogComponent>,
+    public dialogRef: MatDialogRef<SShKeyCreationDialogComponent>,
     public dialogService: DialogService,
     public sshKeyPairService: SSHKeyPairService
   ) { }

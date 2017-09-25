@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 
 import { OsType, Zone } from '../../shared';
@@ -33,12 +33,12 @@ export class TemplateCreationComponent implements OnInit {
   public loading: boolean;
 
   constructor(
-    private dialogRef: MdDialogRef<TemplateCreationComponent>,
+    private dialogRef: MatDialogRef<TemplateCreationComponent>,
     private osTypeService: OsTypeService,
     private isoCreationAction: IsoCreateAction,
     private templateCreationAction: TemplateCreateAction,
     private zoneService: ZoneService,
-    @Inject(MD_DIALOG_DATA) data: any
+    @Inject(MAT_DIALOG_DATA) data: any
   ) {
     this.mode = data.mode;
     this.snapshot = data.snapshot;

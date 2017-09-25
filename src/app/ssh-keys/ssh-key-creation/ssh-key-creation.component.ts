@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SShKeyCreationDialogComponent } from './ssh-key-creation-dialog.component';
 import { SshPrivateKeyDialogComponent } from './ssh-private-key-dialog.component';
@@ -13,7 +13,7 @@ import { ListService } from '../../shared/components/list/list.service';
 })
 export class SshKeyCreationComponent {
   constructor(
-    private dialog: MdDialog,
+    private dialog: MatDialog,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private listService: ListService

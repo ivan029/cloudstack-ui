@@ -2,16 +2,16 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
-  MdButtonModule,
-  MdCheckboxModule,
-  MdDialogModule,
-  MdIconModule,
-  MdInputModule,
-  MdMenuModule,
-  MdRadioModule,
-  MdSelectModule,
-  MdTabsModule,
-  MdTooltipModule
+  MatButtonModule,
+  MatCheckboxModule,
+  MatDialogModule,
+  MatIconModule,
+  MatInputModule,
+  MatMenuModule,
+  MatRadioModule,
+  MatSelectModule,
+  MatTabsModule,
+  MatTooltipModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -57,16 +57,16 @@ import { TemplateActionsSidebarComponent } from './template-sidebar/template-act
     FormsModule,
     ClipboardModule,
     DynamicModule.withComponents([TemplateComponent]),
-    MdButtonModule,
-    MdCheckboxModule,
-    MdDialogModule,
-    MdIconModule,
-    MdInputModule,
-    MdMenuModule,
-    MdRadioModule,
-    MdSelectModule,
-    MdTabsModule,
-    MdTooltipModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatIconModule,
+    MatInputModule,
+    MatMenuModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatTabsModule,
+    MatTooltipModule,
     RouterModule,
     SharedModule,
     TagsModule,

@@ -6,18 +6,18 @@
     (ngModelChange)="updateTime($event)"
   ></cs-time-picker>
 
-  <md-select
+  <mat-select
     name="dayOfMonth"
     [ngModel]="dayOfMonth"
     (ngModelChange)="updateDayOfMonth($event)"
     [placeholder]="'DATE_TIME.DAY_OF_MONTH' | translate"
     required
   >
-    <md-option
+    <mat-option
       *ngFor="let d of daysOfMonth"
       [value]="d"
     >
       {{ d }}
-    </md-option>
-  </md-select>
+    </mat-option>
+  </mat-select>
 </div>

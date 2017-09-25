@@ -2,15 +2,15 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
-  MdButtonModule,
-  MdCheckboxModule,
-  MdDialogModule,
-  MdIconModule,
-  MdInputModule,
-  MdMenuModule,
-  MdSelectModule,
-  MdTabsModule,
-  MdTooltipModule
+  MatButtonModule,
+  MatCheckboxModule,
+  MatDialogModule,
+  MatIconModule,
+  MatInputModule,
+  MatMenuModule,
+  MatSelectModule,
+  MatTabsModule,
+  MatTooltipModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -47,16 +47,16 @@ import { SgTemplateListComponent } from './sg-template-list/sg-template-list.com
     FormsModule,
     RouterModule,
     TranslateModule,
-    MdCheckboxModule,
-    MdSelectModule,
-    MdTooltipModule,
-    MdDialogModule,
+    MatCheckboxModule,
+    MatSelectModule,
+    MatTooltipModule,
+    MatDialogModule,
     SharedModule,
-    MdMenuModule,
-    MdButtonModule,
-    MdIconModule,
-    MdInputModule,
-    MdTabsModule
+    MatMenuModule,
+    MatButtonModule,
+    MatIconModule,
+    MatInputModule,
+    MatTabsModule
   ],
   exports: [
     SgTemplateListComponent

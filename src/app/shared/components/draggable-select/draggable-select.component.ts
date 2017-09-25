@@ -19,9 +19,9 @@ import {
 import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import {
   fadeInContent,
-  MD_PLACEHOLDER_GLOBAL_OPTIONS,
-  MD_SELECT_SCROLL_STRATEGY,
-  MdSelect,
+  MAT_PLACEHOLDER_GLOBAL_OPTIONS,
+  MAT_SELECT_SCROLL_STRATEGY,
+  MatSelect,
   PlaceholderOptions,
   transformPanel,
   transformPlaceholder,
@@ -61,7 +61,7 @@ import * as uuid from 'uuid';
     fadeInContent
   ]
 })
-export class DraggableSelectComponent extends MdSelect implements AfterContentInit, OnDestroy {
+export class DraggableSelectComponent extends MatSelect implements AfterContentInit, OnDestroy {
   @Input() public dragItems: Array<any>;
   public bagId: string = uuid.v4();
 
@@ -71,7 +71,6 @@ export class DraggableSelectComponent extends MdSelect implements AfterContentIn
     private dragula: DragulaService,
     _viewportRuler: ViewportRuler,
     _changeDetectorRef: ChangeDetectorRef,
-    _overlay: Overlay,
     _platform: Platform,
     renderer: Renderer2,
     elementRef: ElementRef,
@@ -80,13 +79,12 @@ export class DraggableSelectComponent extends MdSelect implements AfterContentIn
     @Optional() _parentFormGroup: FormGroupDirective,
     @Self() @Optional() _control: NgControl,
     @Attribute('tabindex') tabIndex: string,
-    @Optional() @Inject(MD_PLACEHOLDER_GLOBAL_OPTIONS) placeholderOptions: PlaceholderOptions,
-    @Inject(MD_SELECT_SCROLL_STRATEGY) _scrollStrategyFactory
+    @Optional() @Inject(MAT_PLACEHOLDER_GLOBAL_OPTIONS) placeholderOptions: PlaceholderOptions,
+    @Inject(MAT_SELECT_SCROLL_STRATEGY) _scrollStrategyFactory
   ) {
     super(
       _viewportRuler,
       _changeDetectorRef,
-      _overlay,
       _platform,
       renderer,
       elementRef,

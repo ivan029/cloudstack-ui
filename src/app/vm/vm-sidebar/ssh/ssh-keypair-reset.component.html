@@ -1,22 +1,22 @@
 <div *loading="resettingKeyInProgress">
   <h3 class="mat-dialog-title">{{ 'VM_PAGE.VM_DETAILS.SSH_KEY.SELECT_SSH_KEY' | translate }}</h3>
   <div *loading="!sshKeyList" class="mat-dialog-content">
-    <md-select
+    <mat-select
       *ngIf="sshKeyList?.length; else noGroups"
       [(ngModel)]="selectedSshKeyName"
     >
-      <md-option *ngFor="let key of sshKeyList" [value]="key.name">
+      <mat-option *ngFor="let key of sshKeyList" [value]="key.name">
         {{ key.name }}
-      </md-option>
-    </md-select>
+      </mat-option>
+    </mat-select>
     <ng-template #noGroups>{{ 'VM_PAGE.VM_DETAILS.SSH_KEY.NO_SSH_KEYS' | translate }}</ng-template>
   </div>
   <div class="mat-dialog-actions">
-    <button md-button color="primary" mdDialogClose>
+    <button mat-button color="primary" matDialogClose>
       {{ 'COMMON.CANCEL' | translate }}
     </button>
     <button
-      md-button
+      mat-button
       color="primary"
       [disabled]="!selectedSshKeyName"
       (click)="resetSshKey()"

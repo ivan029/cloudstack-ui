@@ -1,9 +1,9 @@
-:host /deep/ md-select {
+:host /deep/ mat-select {
   margin: 25px 0 20px;
   width: 100%;
 }
 
-md-radio-button {
+mat-radio-button {
   margin: 5px 0;
 
   &:last-of-type {
@@ -16,6 +16,6 @@ md-radio-button {
   overflow: visible;
 }
 
-md-form-field {
+mat-form-field {
   margin-top: 4px;
 }

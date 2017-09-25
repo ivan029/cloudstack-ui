@@ -5,9 +5,9 @@
     <div class="mat-dialog-content">
       <div [class.flex-dialog-content]="!snapshot">
         <div [class.column]="!snapshot">
-          <md-form-field class="full-width-input">
+          <mat-form-field class="full-width-input">
             <input
-              mdInput
+              matInput
               name="name"
               [(ngModel)]="name"
               [placeholder]="'TEMPLATE_PAGE.TEMPLATE_CREATION.NAME' | translate"
@@ -15,31 +15,31 @@
               maxlength="255"
               required
             >
-            <md-hint align="end">
+            <mat-hint align="end">
               <cs-character-count [value]="name" [maxLength]="255"></cs-character-count>
-            </md-hint>
-          </md-form-field>
+            </mat-hint>
+          </mat-form-field>
           <br>
-          <md-form-field class="full-width-input">
+          <mat-form-field class="full-width-input">
             <input
-              mdInput
+              matInput
               name="description"
               [(ngModel)]="displayText"
               [placeholder]="'TEMPLATE_PAGE.TEMPLATE_CREATION.DESCRIPTION' | translate"
               maxlength="255"
               required
             >
-            <md-hint align="end">
+            <mat-hint align="end">
               <cs-character-count
                 [value]="displayText"
                 [maxLength]="255"
               ></cs-character-count>
-            </md-hint>
-          </md-form-field>
+            </mat-hint>
+          </mat-form-field>
           <br>
-          <md-form-field *ngIf="!snapshot" class="full-width-input">
+          <mat-form-field *ngIf="!snapshot" class="full-width-input">
             <input
-              mdInput
+              matInput
               type="url"
               name="url"
               [(ngModel)]="url"
@@ -49,80 +49,80 @@
               required
               #urlField="ngModel"
             >
-            <md-error
+            <mat-error
               *ngIf="urlField.hasError('pattern')"
             >
               {{ 'TEMPLATE_PAGE.TEMPLATE_CREATION.INVALID_URL' | translate }}
-            </md-error>
-            <md-hint align="end">
+            </mat-error>
+            <mat-hint align="end">
               <cs-character-count [value]="url" [maxLength]="255"></cs-character-count>
-            </md-hint>
-          </md-form-field>
+            </mat-hint>
+          </mat-form-field>
         </div>
         <div [class.column]="!snapshot">
           <div>
-            <md-select
+            <mat-select
               class="form-select-control"
               [placeholder]="'TEMPLATE_PAGE.TEMPLATE_CREATION.OS_TYPE' | translate"
               [(ngModel)]="osTypeId"
               id="osType"
               name="osType"
             >
-              <md-option
+              <mat-option
                 *ngFor="let osType of osTypes"
                 [value]="osType.id"
               >
                 {{ osType.description }}
-              </md-option>
-            </md-select>
+              </mat-option>
+            </mat-select>
           </div>
           <div *ngIf="!snapshot">
-            <md-select
+            <mat-select
               class="form-select-control"
               [placeholder]="'TEMPLATE_PAGE.TEMPLATE_CREATION.ZONE' | translate"
               [(ngModel)]="zoneId"
               id="serviceOffering"
               name="serviceOffering"
             >
-              <md-option
+              <mat-option
                 *ngFor="let zone of zones"
                 [value]="zone.id"
               >
                 {{ zone.name }}
-              </md-option>
-            </md-select>
+              </mat-option>
+            </mat-select>
           </div>
           <div>
-            <md-checkbox
+            <mat-checkbox
               *ngIf="mode === 'Template'"
               name="pass"
               [(ngModel)]="passwordEnabled"
             >
               {{ 'TEMPLATE_PAGE.TEMPLATE_CREATION.PASSWORD_ENABLED' | translate }}
-            </md-checkbox>
-            <md-checkbox
+            </mat-checkbox>
+            <mat-checkbox
               class="dynscal-checkbox"
               name="dynscal"
               [(ngModel)]="dynamicallyScalable"
               *ngIf="mode === 'Template'"
             >
               {{ 'TEMPLATE_PAGE.TEMPLATE_CREATION.DYNAMICALLY_SCALABLE' | translate }}
-            </md-checkbox>
+            </mat-checkbox>
           </div>
         </div>
       </div>
     </div>
     <div class="mat-dialog-actions">
       <button
-        md-button
+        mat-button
         color="primary"
-        mdDialogClose
+        matDialogClose
         type="button"
       >
         {{ 'COMMON.CANCEL' | translate }}
       </button>
       <button
-        md-button
+        mat-button
         color="primary"
         type="submit"
         [disabled]="!templateCreationForm.valid"

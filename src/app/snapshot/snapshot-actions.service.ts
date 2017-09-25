@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { DialogService } from '../dialog/dialog-service/dialog.service';
 import { ActionsService } from '../shared/interfaces/action-service.interface';
@@ -38,7 +38,7 @@ export class SnapshotActionsService implements ActionsService<Snapshot, Snapshot
   ];
 
   constructor(
-    private dialog: MdDialog,
+    private dialog: MatDialog,
     private dialogService: DialogService,
     private jobNotificationService: JobsNotificationService,
     private notificationService: NotificationService,

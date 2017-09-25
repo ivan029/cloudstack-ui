@@ -1,14 +1,14 @@
-<md-select
+<mat-select
   *ngIf="daysOfWeek$ | async as daysOfWeek"
   name="dayOfWeek"
   [(ngModel)]="dayOfWeek"
   [placeholder]="'DATE_TIME.DAY_OF_WEEK' | translate"
   required
 >
-  <md-option
+  <mat-option
     *ngFor="let day of daysOfWeek"
     [value]="day.value"
   >
     {{ day.name }}
-  </md-option>
-</md-select>
+  </mat-option>
+</mat-select>

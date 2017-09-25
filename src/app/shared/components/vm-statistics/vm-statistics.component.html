@@ -2,42 +2,42 @@
   <h4 class="stat-header">
     {{ 'VM_PAGE.RESOURCE_USAGE.TITLE' | translate }}
     <button
-      md-icon-button
+      mat-icon-button
       class="toggle"
       [class.closed]="!isOpen"
       (click)="handleCollapse($event)"
     >
-      <md-icon>keyboard_arrow_up</md-icon>
+      <mat-icon>keyboard_arrow_up</mat-icon>
     </button>
   </h4>
   <div class="stat-list" [class.closed]="!isOpen">
     <ng-container *ngIf="isAdmin">
-      <md-tab-group
+      <mat-tab-group
         class="tab-switch"
         [selectedIndex]="statsType"
         (selectChange)="switchType()"
       >
-        <md-tab label="{{ 'VM_PAGE.RESOURCE_USAGE.ACCOUNT' | translate }}"></md-tab>
-        <md-tab label="{{ 'VM_PAGE.RESOURCE_USAGE.DOMAIN' | translate }}"></md-tab>
-      </md-tab-group>
+        <mat-tab label="{{ 'VM_PAGE.RESOURCE_USAGE.ACCOUNT' | translate }}"></mat-tab>
+        <mat-tab label="{{ 'VM_PAGE.RESOURCE_USAGE.DOMAIN' | translate }}"></mat-tab>
+      </mat-tab-group>
       <cs-divider-vertical></cs-divider-vertical>
     </ng-container>
-    <md-tab-group
+    <mat-tab-group
       class="tab-switch"
       [selectedIndex]="mode"
       (selectChange)="switchMode()"
     >
-      <md-tab label="{{ 'VM_PAGE.RESOURCE_USAGE.USED' | translate }}"></md-tab>
-      <md-tab label="{{ 'VM_PAGE.RESOURCE_USAGE.FREE' | translate }}"></md-tab>
-    </md-tab-group>
+      <mat-tab label="{{ 'VM_PAGE.RESOURCE_USAGE.USED' | translate }}"></mat-tab>
+      <mat-tab label="{{ 'VM_PAGE.RESOURCE_USAGE.FREE' | translate }}"></mat-tab>
+    </mat-tab-group>
     <div class="stat-list-container">
-      <md-card *ngFor="let stat of statsList" class="stat-card-md">
-        <md-card-header>
-          <md-card-title>
-            <h2 class="md-card-title-text">{{ stat.header | translate }}</h2>
-          </md-card-title>
-        </md-card-header>
-        <md-card-content *loading="fetching">
+      <mat-card *ngFor="let stat of statsList" class="stat-card-md">
+        <mat-card-header>
+          <mat-card-title>
+            <h2 class="mat-card-title-text">{{ stat.header | translate }}</h2>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content *loading="fetching">
           <div
             *ngFor="let bar of stat.bars; first as f; last as l"
             class="bar"
@@ -45,10 +45,10 @@
           >
             {{ bar.title | translate }}
             <div class="stat-values">{{ bar.value() | async}}</div>
-            <md-progress-bar [value]="bar.progress()"></md-progress-bar>
+            <mat-progress-bar [value]="bar.progress()"></mat-progress-bar>
           </div>
-        </md-card-content>
-      </md-card>
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
 </div>

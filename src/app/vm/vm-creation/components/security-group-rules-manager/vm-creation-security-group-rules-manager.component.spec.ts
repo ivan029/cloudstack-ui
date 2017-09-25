@@ -1,6 +1,6 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 import { MockTranslatePipe } from '../../../../../testutils/mocks/mock-translate.pipe.spec';
@@ -84,7 +84,7 @@ const mockEgressRules = [new NetworkRule({
   CIDR: '0.0.0.0/0'
 })];
 
-class MockMdDialog {
+class MockMatDialog {
   public open(): any {
     const rules = new Rules([mockSg], mockIngressRules, mockEgressRules);
     const dialogCloseValue = VmCreationSecurityGroupData.fromRules(rules);
@@ -107,7 +107,7 @@ describe('Sg Rules manager component', () => {
         FancySelectComponent
       ],
       providers: [
-        { provide: MdDialog, useClass: MockMdDialog }
+        { provide: MatDialog, useClass: MockMatDialog }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });
@@ -119,7 +119,7 @@ describe('Sg Rules manager component', () => {
   }));
 
   it('shows dialog', () => {
-    const dialog = TestBed.get(MdDialog);
+    const dialog = TestBed.get(MatDialog);
     spyOn(dialog, 'open').and.callThrough();
     f.detectChanges();
     f.debugElement.query(By.css('.fancy-select-button')).triggerEventHandler('click');
@@ -132,7 +132,7 @@ describe('Sg Rules manager component', () => {
     expect(comp.savedData.rules).toEqual(emptyRules);
     expect(comp.securityGroupRulesManagerData).toBeUndefined();
 
-    const dialog = TestBed.get(MdDialog);
+    const dialog = TestBed.get(MatDialog);
     spyOn(dialog, 'open').and.callThrough();
     f.detectChanges();
     f.debugElement.query(By.css('.fancy-select-button')).triggerEventHandler('click');
