@@ -22,8 +22,13 @@ import { SshKeySidebarComponent } from './ssh-key-sidebar/ssh-key-sidebar.compon
 import { SshKeysPageComponent } from './ssh-keys-page/ssh-keys-page.component';
 import { SshKeyListComponent } from './ssh-key-list/ssh-key-list.component';
 import { ShhKeyFilterComponent } from './ssh-key-filter/ssh-key-filter.component';
-import { DynamicModule } from "ng-dynamic-component";
-import { DraggableSelectModule } from "../shared/components/draggable-select/draggable-select.module";
+import { DynamicModule } from 'ng-dynamic-component';
+import { DraggableSelectModule } from '../shared/components/draggable-select/draggable-select.module';
+import { SshKeyListContainerComponent } from './containers/ssh-key-list.container';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './redux/ssh-key.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { SshKeyEffects } from './redux/ssh-key.effects';
 
 
 @NgModule({
@@ -41,12 +46,12 @@ import { DraggableSelectModule } from "../shared/components/draggable-select/dra
     MdIconModule,
     MdInputModule,
     DynamicModule.withComponents([SshKeyListItemComponent]),
-    DraggableSelectModule
-  ],
-  exports: [
-    SshKeysPageComponent
+    DraggableSelectModule,
+    StoreModule.forFeature('sshKeys', reducers),
+    EffectsModule.forFeature([SshKeyEffects]),
   ],
   declarations: [
+    SshKeyListContainerComponent,
     SshKeyListComponent,
     SshKeyListItemComponent,
     SshKeysPageComponent,
@@ -62,4 +67,5 @@ import { DraggableSelectModule } from "../shared/components/draggable-select/dra
     SshPrivateKeyDialogComponent
   ]
 })
-export class SshKeysModule { }
+export class SshKeysModule {
+}
